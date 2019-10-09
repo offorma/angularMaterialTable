@@ -1,0 +1,18 @@
+<h1>Employee Table</h1>
+
+<div class="example-container mat-elevation-z8" *ngIf="dataSources">
+  <mat-table [dataSource]="dataSources" matSort>
+    <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ col |uppercase}} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element[col] }} </mat-cell>
+    </ng-container>
+    <ng-container [matColumnDef] = "action">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>action</mat-header-cell>
+      <mat-cell *matCellDef="let element"> <button>Edit</button> </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns" (click)="openDialog(row)">></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="pageOPtion" [length]="dataSources.data.length"></mat-paginator>
+</div>
+
